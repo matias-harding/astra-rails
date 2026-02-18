@@ -15,38 +15,21 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:7-alpine
-    volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
   web:
     build: .
-    command: bundle exec rails server -b 0.0.0.0
+    command: ./bin/rails server -b 0.0.0.0
     volumes:
-      - .:/app
-      # Prevent host's bundler artifacts from overwriting container's gems
-      - bundle_cache:/usr/local/bundle
+      - .:/rails
     ports:
       - "3000:3000"
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgres://astra:astra_password@db:5432/astra_rails_development
-      REDIS_URL: redis://redis:6379/0
     depends_on:
       db:
         condition: service_healthy
-      redis:
-        condition: service_healthy
+    stdin_open: true
+    tty: true
 
 volumes:
   postgres_data:
-  redis_data:
-  bundle_cache:
