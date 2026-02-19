@@ -1,0 +1,41 @@
+<%= form_with model: event do |f| %>
+  <% if event.errors.any? %>
+    <div class="form-errors">
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_datetime, "Start" %>
+    <%= f.datetime_local_field :start_datetime, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_datetime, "End" %>
+    <%= f.datetime_local_field :end_datetime %>
+  </div>
+
+  <div class="field field--inline">
+    <%= f.check_box :all_day %>
+    <%= f.label :all_day, "All day" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 3 %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn--primary" %>
+    <button type="button" class="btn" data-action="calendar#closeModal">Cancel</button>
+  </div>
+<% end %>

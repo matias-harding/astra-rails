@@ -1,0 +1,19 @@
+<turbo-frame id="modal">
+  <div class="modal-header">
+    <h2><%= @event.title %></h2>
+    <button class="modal-close" data-action="calendar#closeModal" aria-label="Close">&times;</button>
+  </div>
+  <div class="event-detail">
+    <p><strong>Start:</strong> <%= @event.start_datetime.strftime("%B %-d, %Y %l:%M %p") %></p>
+    <% if @event.end_datetime.present? %>
+      <p><strong>End:</strong> <%= @event.end_datetime.strftime("%B %-d, %Y %l:%M %p") %></p>
+    <% end %>
+    <p><strong>All day:</strong> <%= @event.all_day? ? "Yes" : "No" %></p>
+    <% if @event.description.present? %>
+      <p><strong>Description:</strong> <%= @event.description %></p>
+    <% end %>
+    <div class="form-actions">
+      <%= link_to "Edit", edit_event_path(@event), data: { turbo_frame: "modal" }, class: "btn btn--primary" %>
+    </div>
+  </div>
+</turbo-frame>

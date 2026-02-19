@@ -1,0 +1,7 @@
+<turbo-frame id="modal">
+  <div class="modal-header">
+    <h2>New Event</h2>
+    <button class="modal-close" data-action="calendar#closeModal" aria-label="Close">&times;</button>
+  </div>
+  <%= render "form", event: @event %>
+</turbo-frame>
