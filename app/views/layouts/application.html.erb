@@ -22,7 +22,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="calendar"
+        data-calendar-events-url-value="<%= content_for(:calendar_events_url) %>"
+        data-calendar-new-event-url-value="<%= content_for(:calendar_new_event_url) %>">
     <% if authenticated? %>
       <nav class="app-nav">
         <span class="app-nav__user"><%= Current.session.user.email_address %></span>
