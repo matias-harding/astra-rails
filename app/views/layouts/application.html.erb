@@ -11,19 +11,34 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% if authenticated? %>
+      <nav class="app-nav">
+        <span class="app-nav__user"><%= Current.session.user.email_address %></span>
+        <%= button_to "Sign out", session_path, method: :delete, class: "app-nav__signout" %>
+      </nav>
+    <% end %>
+
+    <% if notice.present? %>
+      <p id="flash-notice" class="flash-notice"><%= notice %></p>
+    <% end %>
+
     <%= yield %>
+
+    <div id="event-modal-backdrop" class="modal-backdrop hidden">
+      <div class="modal-dialog">
+        <turbo-frame id="modal"></turbo-frame>
+      </div>
+    </div>
   </body>
 </html>
