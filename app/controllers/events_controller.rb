@@ -43,6 +43,7 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Event updated." }
         format.turbo_stream { render turbo_stream: turbo_stream.action(:refresh, "") }
+        format.json { head :ok }
       end
     else
       respond_to do |format|

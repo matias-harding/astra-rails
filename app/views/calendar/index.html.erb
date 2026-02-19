@@ -1,0 +1,7 @@
+<%= content_for :title, "Calendar" %>
+
+<div data-controller="calendar"
+     data-calendar-events-url-value="<%= feed_events_path(format: :json) %>"
+     data-calendar-new-event-url-value="<%= new_event_path %>">
+  <div data-calendar-target="container" id="calendar-container"></div>
+</div>
