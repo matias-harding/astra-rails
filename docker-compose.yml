@@ -16,7 +16,10 @@ services:
       retries: 5
 
   web:
-    build: .
+    build:
+      context: .
+      args:
+        BUNDLE_WITHOUT: ""   # Install dev gems for local development
     command: ./bin/rails server -b 0.0.0.0
     volumes:
       - .:/rails
@@ -25,6 +28,7 @@ services:
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgres://astra:astra_password@db:5432/astra_rails_development
+      BUNDLE_WITHOUT: ""
     depends_on:
       db:
         condition: service_healthy

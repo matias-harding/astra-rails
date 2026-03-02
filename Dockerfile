@@ -24,6 +24,11 @@ ENV RAILS_ENV="production" \
 # ── build stage ──────────────────────────────────────────────────────────────
 FROM base AS build
 
+# Pass --build-arg BUNDLE_WITHOUT="" to include dev gems (used by docker-compose for development).
+# Defaults to "development" to keep production images lean.
+ARG BUNDLE_WITHOUT="development"
+ENV BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
+
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       build-essential \
