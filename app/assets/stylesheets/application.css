@@ -22,7 +22,7 @@ body {
 
 /* Nav */
 .app-nav {
-    background: #2563eb;
+    background: #3225eb;
     color: white;
     padding: 0.625rem 1.25rem;
     display: flex;
@@ -32,6 +32,13 @@ body {
 }
 
 .app-nav__user { font-size: 0.875rem; }
+
+.app-nav__widget {
+    font-size: 0.875rem;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 0.50rem 0.75rem;
+    border-radius: 4px;
+}
 
 .app-nav__signout {
     background: rgba(255,255,255,0.2);

@@ -28,6 +28,10 @@
     <% if authenticated? %>
       <nav class="app-nav">
         <span class="app-nav__user"><%= Current.session.user.email_address %></span>
+        <div class="app-nav__widget">
+          <%= 'Weather Widget' %></div>
+        <div class="app-nav__widget">
+          <%= 'Currency widget' %></div>
         <%= button_to "Sign out", session_path, method: :delete, class: "app-nav__signout" %>
       </nav>
     <% end %>
